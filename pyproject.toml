@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "funstat-api"
-version = "0.1.1"
+version = "0.1.2"
 description = "Sync and async Python client for the Funstat API (Telegram user/group statistics)"
 readme = "README.md"
 license = { file = "LICENSE" }

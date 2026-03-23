@@ -4,6 +4,8 @@ Python client for the [Funstat](http://funstat.in/?start=0108FC1E9BEF75617466) A
 
 Supports both **sync** and **async** usage.
 
+Documentation: https://chizumeiji.github.io/funstat-api/
+
 ## Installation
 
 ```bash
