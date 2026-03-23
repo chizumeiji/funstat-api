@@ -1,0 +1,63 @@
+site_name: funstat-api
+site_description: Python client for the Funstat API — Telegram user and group statistics
+site_url: https://chizumeiji.github.io/funstat-api
+repo_url: https://github.com/chizumeiji/funstat-api
+repo_name: funstat-api
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: en
+  palette:
+    - scheme: slate
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.sidebar
+    - navigation.top
+    - navigation.indexes
+    - toc.integrate
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - tables
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - API Reference:
+    - Sync Client: api/sync.md
+    - Async Client: api/async.md
+    - Models: api/models.md
+    - Exceptions: api/exceptions.md
+  - Changelog: changelog.md
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search
