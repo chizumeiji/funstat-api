@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://chizumeiji.github.io/funstat-api/</loc>
+         <lastmod>2026-03-23</lastmod>
+    </url>
+    <url>
+         <loc>https://chizumeiji.github.io/funstat-api/changelog/</loc>
+         <lastmod>2026-03-23</lastmod>
+    </url>
+    <url>
+         <loc>https://chizumeiji.github.io/funstat-api/getting-started/</loc>
+         <lastmod>2026-03-23</lastmod>
+    </url>
+    <url>
+         <loc>https://chizumeiji.github.io/funstat-api/api/async/</loc>
+         <lastmod>2026-03-23</lastmod>
+    </url>
+    <url>
+         <loc>https://chizumeiji.github.io/funstat-api/api/exceptions/</loc>
+         <lastmod>2026-03-23</lastmod>
+    </url>
+    <url>
+         <loc>https://chizumeiji.github.io/funstat-api/api/models/</loc>
+         <lastmod>2026-03-23</lastmod>
+    </url>
+    <url>
+         <loc>https://chizumeiji.github.io/funstat-api/api/sync/</loc>
+         <lastmod>2026-03-23</lastmod>
+    </url>
+</urlset>
