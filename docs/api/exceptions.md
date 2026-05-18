@@ -57,10 +57,26 @@ except ApiError as e:
 
 ---
 
+## `UserHiddenError`
+
+Raised specifically when the API returns a `403 Forbidden` status code, which usually indicates that a user's data is hidden by their privacy settings. Inherits from `ApiError`.
+
+```python
+from funstat_api import UserHiddenError
+
+try:
+    result = fs.stats("hidden_user")
+except UserHiddenError as e:
+    print(f"Data is hidden for {e.path}")
+```
+
+---
+
 ## Exception hierarchy
 
 ```
 FunstatError
 ├── ResolveError   # username/group not found
 └── ApiError       # non-200 HTTP response
+    └── UserHiddenError # 403 Forbidden (privacy settings)
 ```

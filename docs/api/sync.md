@@ -202,6 +202,14 @@ print(result.data.actual_users)
 
 ---
 
+### name_usage
+
+`name_usage(name, page=1, page_size=20) →` [`NameUsageResponse`](models.md#nameusageresponse) `| None`
+
+Search who uses or has used a specific name (first name / last name).
+
+---
+
 ### common_groups_for_users
 
 `common_groups_for_users(ids) →` [`ChatInfoExtResponse`](models.md#chatinfoextresponse) `| None`

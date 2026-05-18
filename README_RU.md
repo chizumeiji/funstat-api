@@ -1,6 +1,6 @@
 # funstat-api
 
-Python-клиент для [Funstat](http://funstat.in/?start=0108FC1E9BEF75617466) API — статистика пользователей и групп Telegram.
+Python-клиент для [Funstat/Telelog](http://telelog.org/) API — статистика пользователей и групп Telegram.
 
 Поддерживает **синхронный** и **асинхронный** режимы работы.
 
@@ -15,9 +15,11 @@ pip install funstat-api
 ### Синхронно
 
 ```python
-from funstat_api import FunstatClient
+from funstat_api import FunstatClient, FunstatConfig
 
-fs = FunstatClient("your_token")
+# Опционально: можно передать свои заголовки
+config = FunstatConfig(headers={"X-My-Header": "Value"})
+fs = FunstatClient("your_token", config=config)
 
 # Статистика пользователя
 stats = fs.stats("durov")
@@ -35,12 +37,15 @@ with FunstatClient("your_token") as fs:
 
 ```python
 import asyncio
-from funstat_api import AsyncFunstatClient
+from funstat_api import AsyncFunstatClient, UserHiddenError
 
 async def main():
     async with AsyncFunstatClient("your_token") as fs:
-        stats = await fs.stats("durov")
-        print(stats.data.total_msg_count)
+        try:
+            stats = await fs.stats("durov")
+            print(stats.data.total_msg_count)
+        except UserHiddenError:
+            print("Данные этого пользователя скрыты настройками приватности.")
 
 asyncio.run(main())
 ```
@@ -65,6 +70,9 @@ asyncio.run(main())
 | `get_gifts(user)` | Подарки и их отправители |
 | `common_groups(user)` | Статистика общих групп |
 | `username_usage(username)` | Кто использует или использовал username |
+| `name_usage(name)` | Поиск пользователей по имени |
+| `rep(user)` | Репутация пользователя |
+| `common_groups_for_users(ids)` | Общие группы для списка пользователей |
 | `get_group_info(group)` | Информация о группе/канале |
 | `get_group_members(group)` | Участники группы |
 | `search_text(query)` | Поиск сообщений по тексту |
@@ -76,6 +84,11 @@ asyncio.run(main())
 - `pydantic >= 2.0`
 - `requests >= 2.28` (синхронный клиент)
 - `httpx >= 0.24` (асинхронный клиент)
+
+## Авторы и ссылки
+
+- **Автор:** [@meiji_dev](https://t.me/meiji_dev)
+- **Актуальные ссылки на полезных ботов:** [@sgwlink](https://t.me/sgwlink)
 
 ## Лицензия
 

@@ -1,5 +1,5 @@
 site_name: funstat-api
-site_description: Python client for the Funstat API — Telegram user and group statistics
+site_description: Python client for the Telelog API — Telegram user and group statistics
 site_url: https://chizumeiji.github.io/funstat-api
 repo_url: https://github.com/chizumeiji/funstat-api
 repo_name: funstat-api
@@ -54,7 +54,7 @@ nav:
     - Async Client: api/async.md
     - Models: api/models.md
     - Exceptions: api/exceptions.md
-  - Changelog: changelog.md
+  - Credits: credits.md
 
 extra_css:
   - stylesheets/extra.css

@@ -58,4 +58,5 @@ pip install funstat-api
 
 - [PyPI](https://pypi.org/project/funstat-api/)
 - [GitHub](https://github.com/chizumeiji/funstat-api)
-- [Funstat](http://funstat.in/?start=0108FC1E9BEF75617466)
+- [Funstat / Telelog](https://telelog.info/?start=0108FC1E9BEF75617466)
+- [Telegram Bot](https://t.me/FiveFohyBot)

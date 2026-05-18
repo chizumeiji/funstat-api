@@ -1,6 +1,6 @@
 # funstat-api
 
-Python client for the [Funstat](http://funstat.in/?start=0108FC1E9BEF75617466) API — Telegram user and group statistics.
+Python client for the [Funstat/Telelog](http://telelog.org/) API — Telegram user and group statistics.
 
 Supports both **sync** and **async** usage.
 
@@ -17,9 +17,11 @@ pip install funstat-api
 ### Sync
 
 ```python
-from funstat_api import FunstatClient
+from funstat_api import FunstatClient, FunstatConfig
 
-fs = FunstatClient("your_token")
+# Optional: configure custom headers or base URL
+config = FunstatConfig(headers={"X-My-Header": "Value"})
+fs = FunstatClient("your_token", config=config)
 
 # Get user stats
 stats = fs.stats("durov")
@@ -37,12 +39,15 @@ with FunstatClient("your_token") as fs:
 
 ```python
 import asyncio
-from funstat_api import AsyncFunstatClient
+from funstat_api import AsyncFunstatClient, UserHiddenError
 
 async def main():
     async with AsyncFunstatClient("your_token") as fs:
-        stats = await fs.stats("durov")
-        print(stats.data.total_msg_count)
+        try:
+            stats = await fs.stats("durov")
+            print(stats.data.total_msg_count)
+        except UserHiddenError:
+            print("This user's data is hidden by privacy settings.")
 
 asyncio.run(main())
 ```
@@ -67,6 +72,9 @@ asyncio.run(main())
 | `get_gifts(user)` | Get gift relations |
 | `common_groups(user)` | Get common groups stats |
 | `username_usage(username)` | Who uses or used a username |
+| `name_usage(name)` | Search name usage |
+| `rep(user)` | Get user reputation info |
+| `common_groups_for_users(ids)` | Get common groups for specified users |
 | `get_group_info(group)` | Get group/channel info |
 | `get_group_members(group)` | Get group members |
 | `search_text(query)` | Search messages by text |
@@ -78,6 +86,11 @@ asyncio.run(main())
 - `pydantic >= 2.0`
 - `requests >= 2.28` (sync client)
 - `httpx >= 0.24` (async client)
+
+## Credits
+
+- **Author:** [@meiji_dev](https://t.me/meiji_dev)
+- **Useful bots & links:** [@sgwlink](https://t.me/sgwlink)
 
 ## License
 

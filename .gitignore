@@ -1,1 +1,26 @@
+# Distribution / Build
 dist/
+build/
+*.egg-info/
+
+# Environment
+.env
+.venv
+env/
+venv/
+
+# Cache
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Documentation
+site/
+
+# Temporary test scripts from this session
+test_manual.py
+test_all_endpoints.py
+debug_api.py
+debug_raw.py

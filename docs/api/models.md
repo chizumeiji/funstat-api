@@ -302,7 +302,64 @@ class PingResult:
 | `StickerInfoResponse` | `list[`[`StickerInfo`](#stickerinfo)`]` |
 | `UCommonGroupInfoResponse` | `list[`[`UCommonGroupInfo`](#ucommongroupinfo)`]` |
 | `UsernameUsageResponse` | [`UsernameUsageModel`](#usernameusagemodel) |
+| `NameUsageResponse` | [`UserResultPagedNoCount`](#userresultpagednocount) |
 | `ChatInfoExtResponse` | `list[`[`ChatInfoExt`](#chatinfoext)`]` |
+| `WhoWroteTextResponse` | [`WhoWroteTextPaged`](#whowrotetextpaged) |
+
+---
+
+## ResolvedUserResponse
+
+`success` · [`TechInfo`](#techinfo) · `data: list[`[`ResolvedUser`](#resolveduser)`]`
+
+## UserStatsMinResponse
+
+`success` · [`TechInfo`](#techinfo) · `data:` [`UserStatsMin`](#userstatsmin)
+
+## UserStatsResponse
+
+`success` · [`TechInfo`](#techinfo) · `data:` [`UserStats`](#userstats)
+
+## UserMsgPagedResponse
+
+`success` · [`TechInfo`](#techinfo) · [`Paging`](#paging) · `data: list[`[`UserMsg`](#usermsg)`]`
+
+## UserNameInfoResponse
+
+`success` · [`TechInfo`](#techinfo) · `data: list[`[`UserNameInfo`](#usernameinfo)`]`
+
+## UsrChatInfoResponse
+
+`success` · [`TechInfo`](#techinfo) · `data: list[`[`UsrChatInfo`](#usrchatinfo)`]`
+
+## GroupMemberResponse
+
+`success` · [`TechInfo`](#techinfo) · `data: list[`[`GroupMember`](#groupmember)`]`
+
+## GiftRelationResponse
+
+`success` · [`TechInfo`](#techinfo) · `data: list[`[`GiftRelationInfo`](#giftrelationinfo)`]`
+
+## StickerInfoResponse
+
+`success` · [`TechInfo`](#techinfo) · `data: list[`[`StickerInfo`](#stickerinfo)`]`
+
+## UCommonGroupInfoResponse
+
+`success` · [`TechInfo`](#techinfo) · `data: list[`[`UCommonGroupInfo`](#ucommongroupinfo)`]`
+
+## UsernameUsageResponse
+
+`success` · [`TechInfo`](#techinfo) · `data:` [`UsernameUsageModel`](#usernameusagemodel)
+
+## ChatInfoExtResponse
+
+`success` · [`TechInfo`](#techinfo) · `data: list[`[`ChatInfoExt`](#chatinfoext)`]`
+
+## WhoWroteTextResponse
+
+`success` · [`TechInfo`](#techinfo) · `data:` [`WhoWroteTextPaged`](#whowrotetextpaged)
+se` | `list[`[`ChatInfoExt`](#chatinfoext)`]` |
 | `WhoWroteTextResponse` | [`WhoWroteTextPaged`](#whowrotetextpaged) |
 
 ---

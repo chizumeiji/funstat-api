@@ -1,0 +1,2547 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "funstat API v1.0.1.0 (build - 04/27/2026 19:44:25)",
+    "description": "free id:8104838448,5788146388,7816562745,7745296119,994270689,7588289238,7864982459,5095649820,5933194496,7695732077,770181987,7396846007,1758794868,6274335937,1390310829,811027373,1559901915,6152566379,558534982",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/groups/common_groups": {
+      "get": {
+        "tags": [
+          "Groups"
+        ],
+        "summary": "[COST 0.5 each request] Return common groups specified users (all requested users in these groups) (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/chat_inf_extArrayapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/groups/{id}": {
+      "get": {
+        "tags": [
+          "Groups"
+        ],
+        "summary": "Group basic info, links and today stats COST 0.01 (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/groups/{id}/members": {
+      "get": {
+        "tags": [
+          "Groups"
+        ],
+        "summary": "Group group members [COST 15 each request] (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/group_memberArrayapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/gifts_relation": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "gifts, FROM whom received and  TO WHOM sent [COST 5 by user if more 5 relations found]. careful when request bot id - may be millions rows (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Номер страницы(1+)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 1
+            },
+            "example": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 20
+            },
+            "example": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/gift_relations_infArrayapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/stickers": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "sticker packs created by user [COST 1 if success found any] (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sticker_infArrayapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/common_groups_stat": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Return users who has common groups with specified user  [cost 5] (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ucommon_group_infArrayapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/reputation": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Return user reputation information [FREE] (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "user id",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/name_usage": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": " (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Номер страницы(1+)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 1
+            },
+            "example": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 20
+            },
+            "example": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResultPagedNoCountapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/username_usage": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Search username usage - users, usage in the past by users, channels, mentions in channel/group desctiprions [COST 0.1 EACH request] (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/username_usage_modelapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/resolve_username": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Cost 0.10 per success found user info (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "array of users telegram @username",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resolved_userArrayapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/stats_min": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User bacic stats (known data in db) FREE (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user_stats_minapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/stats": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Full user stats COST: 1 (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user_statsapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/basic_info_by_id": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user info by telegram ID. Cost 0.10 per success found user info (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "array of users telegram ID",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resolved_userArrayapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/groups_count": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "total count user groups (FREE) (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "onlyMsg",
+            "in": "query",
+            "description": "only groups where any user message",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/messages": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user messages (COST: 10 per user if found and user has MORE THAN 100 messages) (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "group_id",
+            "in": "query",
+            "description": "Filter by group id, optional",
+            "schema": {
+              "maximum": 9223372036854776000,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "text_contains",
+            "in": "query",
+            "description": "Filter by message text (contains this text)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "media_code",
+            "in": "query",
+            "description": "Filter by message mediaCode",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Номер страницы(1+)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 1
+            },
+            "example": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 20
+            },
+            "example": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserMsgArrayapi_answer_paged"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/messages_count": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "total count user messages (FREE) (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/groups": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Known user groups (COST: 5) (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/usr_chat_infArrayapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/names": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User (firstname + lastname) history  COST: 3 (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user_name_infArrayapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/usernames": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "@usernames history  COST: 3 (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user_name_infArrayapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/text/search": {
+      "get": {
+        "tags": [
+          "text"
+        ],
+        "summary": "[COST 0.1 each request] search who / when /where wrote specified text message (Auth policies: api_user)",
+        "parameters": [
+          {
+            "name": "input",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Номер страницы(1+)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 1
+            },
+            "example": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 20
+            },
+            "example": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/who_wrote_textPagedNoCountapi_answer"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppProblem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "api_user"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AppProblem": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "description": "A human-readable explanation specific to this occurrence of the problem.",
+            "nullable": true,
+            "example": "Что-то произошло непонятное и ничего не работает"
+          },
+          "instance": {
+            "type": "string",
+            "description": "A URI reference that identifies the specific occurrence of the problem.It may or may not yield further information\nif dereferenced.",
+            "nullable": true,
+            "example": "/api/v1/Files"
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.",
+            "format": "int32",
+            "nullable": true,
+            "example": 400
+          },
+          "title": {
+            "type": "string",
+            "description": "A short, human-readable summary of the problem type.It SHOULD NOT change from occurrence to occurrence\nof the problem, except for purposes of localization(e.g., using proactive content negotiation;\nsee[RFC7231], Section 3.4).",
+            "nullable": true,
+            "example": "Сервер отклонил запрос"
+          },
+          "type": {
+            "type": "string",
+            "description": "A URI reference [RFC3986] that identifies the problem type. This specification encourages that, when\ndereferenced, it provide human-readable documentation for the problem type\n(e.g., using HTML [W3C.REC-html5-20141028]).  When this member is not present, its value is assumed to be\n\"about:blank\".",
+            "nullable": true,
+            "example": "https://httpstatuses.com/400"
+          },
+          "method": {
+            "type": "string",
+            "description": "Request type",
+            "nullable": true,
+            "example": "POST"
+          },
+          "appVersion": {
+            "type": "string",
+            "description": "Application version",
+            "nullable": true,
+            "example": "1.0.0.47615"
+          },
+          "dateTime": {
+            "type": "string",
+            "description": "Request date and time in (ISO-8601 format)",
+            "format": "date-time",
+            "example": "2021-03-19T15:27:57.2171900+03:00"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "UserMsg": {
+        "required": [
+          "date",
+          "group",
+          "messageId",
+          "text"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "messageId": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "replyToMessageId": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mediaCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mediaName": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "group": {
+            "$ref": "#/components/schemas/chat_inf"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserMsgArrayapi_answer_paged": {
+        "required": [
+          "data",
+          "paging",
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "paging": {
+            "$ref": "#/components/schemas/paging"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/UserMsg"
+              }
+            },
+            "description": "Data"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserResult": {
+        "required": [
+          "first_name",
+          "id",
+          "is_bot"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "first_name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "is_bot": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserResultPagedNoCount": {
+        "required": [
+          "data",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Всего записей (not null, may be zero)",
+            "format": "int32"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserResult"
+            },
+            "description": "Непосредственно данные  (not null, may be empty)"
+          },
+          "isLastPage": {
+            "type": "boolean"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currentPage": {
+            "type": "integer",
+            "description": "Текущая страница",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "Всего страниц",
+            "format": "int32"
+          },
+          "isSliding": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserResultPagedNoCountapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserResultPagedNoCount"
+          }
+        },
+        "additionalProperties": false
+      },
+      "chat_inf": {
+        "required": [
+          "id",
+          "isPrivate",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maximum": 9223372036854776000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "username": {
+            "maxLength": 32,
+            "minLength": 4,
+            "type": "string",
+            "description": "note group can be pulic without username - group for comments in channels",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "chat_inf_ext": {
+        "required": [
+          "id",
+          "isChannel",
+          "isPrivate",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maximum": 9223372036854776000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "isChannel": {
+            "type": "boolean"
+          },
+          "username": {
+            "maxLength": 32,
+            "minLength": 4,
+            "type": "string",
+            "nullable": true
+          },
+          "link": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "chat_inf_extArrayapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/chat_inf_ext"
+            },
+            "description": "Response data",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "gift_relations_inf": {
+        "type": "object",
+        "properties": {
+          "last_gift_date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "from_user_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "from_first_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "from_last_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "from_mainUsername": {
+            "type": "string",
+            "nullable": true
+          },
+          "from_is_active": {
+            "type": "boolean"
+          },
+          "to_user_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "to_first_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "to_last_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "to_mainUsername": {
+            "type": "string",
+            "nullable": true
+          },
+          "to_is_active": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "gift_relations_infArrayapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/gift_relations_inf"
+            },
+            "description": "Response data",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "group_member": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "first_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "is_admin": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "today_msg": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "has_prem": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "has_photo": {
+            "type": "boolean"
+          },
+          "dc_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "group_memberArrayapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/group_member"
+            },
+            "description": "Response data",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "paging": {
+        "required": [
+          "currentPage",
+          "pageSize",
+          "total",
+          "totalPages"
+        ],
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Total rows count (not null, may be zero)",
+            "format": "int32"
+          },
+          "currentPage": {
+            "type": "integer",
+            "description": "Current page (not null, can't be zero)",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "Page size (not null, may be zero)",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "Total count of pages (not null, may be zero)",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "resolved_user": {
+        "required": [
+          "id",
+          "is_active",
+          "is_bot"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "username": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "first_name": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "last_name": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "is_active": {
+            "type": "boolean",
+            "description": ""
+          },
+          "is_bot": {
+            "type": "boolean",
+            "description": ""
+          },
+          "has_premium": {
+            "type": "boolean",
+            "description": "can be null",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": ""
+      },
+      "resolved_userArrayapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/resolved_user"
+            },
+            "description": "Response data",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "sticker_inf": {
+        "required": [
+          "last_seen",
+          "min_seen",
+          "sticker_set_id"
+        ],
+        "type": "object",
+        "properties": {
+          "sticker_set_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "last_seen": {
+            "type": "string",
+            "format": "date"
+          },
+          "min_seen": {
+            "type": "string",
+            "format": "date"
+          },
+          "resolved": {
+            "type": "string",
+            "description": "when null, other props null - title, short_name, stickers_count\nthis mean stickerset was deleted and cannot be resolved. or just in resolve queue (short time XX sec)",
+            "format": "date-time",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "short_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "stickers_count": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "sticker_infArrayapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sticker_inf"
+            },
+            "description": "Response data",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tech_info": {
+        "required": [
+          "current_ballance",
+          "request_cost",
+          "request_duration"
+        ],
+        "type": "object",
+        "properties": {
+          "request_cost": {
+            "type": "number",
+            "description": "Total request cost",
+            "format": "float"
+          },
+          "current_ballance": {
+            "type": "number",
+            "description": "you actual ballance after request",
+            "format": "float"
+          },
+          "request_duration": {
+            "type": "string",
+            "description": "request duration",
+            "format": "date-span",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ucommon_group_inf": {
+        "required": [
+          "common_groups",
+          "user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "common_groups": {
+            "type": "integer",
+            "description": "count common groups with specified user",
+            "format": "int32"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "first_name",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "description": "username ( @tag )",
+            "nullable": true
+          },
+          "is_user_active": {
+            "type": "boolean",
+            "description": "user active (not deleted account)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ucommon_group_infArrayapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ucommon_group_inf"
+            },
+            "description": "Response data",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "user_name_inf": {
+        "required": [
+          "date_time",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "date_time": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "user_name_infArrayapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/user_name_inf"
+            },
+            "description": "Response data",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "user_stats": {
+        "required": [
+          "adm_in_groups",
+          "circle_count",
+          "id",
+          "link_percent",
+          "media_percent",
+          "msg_in_groups_count",
+          "names_count",
+          "reply_percent",
+          "total_groups",
+          "total_msg_count",
+          "usernames_count",
+          "voice_count"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "first_name",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "description": "last_name",
+            "nullable": true
+          },
+          "is_bot": {
+            "type": "boolean",
+            "description": "this user is bot"
+          },
+          "is_active": {
+            "type": "boolean",
+            "description": "user active (not banned/deleted)"
+          },
+          "first_msg_date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "last_msg_date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "total_msg_count": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "msg_in_groups_count": {
+            "type": "integer",
+            "description": "total groups where user wrote something (total_msg_count)",
+            "format": "int64"
+          },
+          "adm_in_groups": {
+            "type": "integer",
+            "description": "count of groups where user moderator or admin",
+            "format": "int32"
+          },
+          "usernames_count": {
+            "type": "integer",
+            "description": "Known @usernames history",
+            "format": "int32"
+          },
+          "names_count": {
+            "type": "integer",
+            "description": "Known names history",
+            "format": "int32"
+          },
+          "total_groups": {
+            "type": "integer",
+            "description": "Total groups count, include without messages",
+            "format": "int32"
+          },
+          "is_cyrillic_primary": {
+            "type": "boolean",
+            "description": "Most of messages cyrillic based text",
+            "nullable": true
+          },
+          "lang_code": {
+            "type": "string",
+            "description": "lang code when known",
+            "nullable": true
+          },
+          "unique_percent": {
+            "type": "number",
+            "description": "unquie messages percent",
+            "format": "float",
+            "nullable": true
+          },
+          "circle_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "voice_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reply_percent": {
+            "type": "number",
+            "description": "how offten user reply somone",
+            "format": "float"
+          },
+          "media_percent": {
+            "type": "number",
+            "description": "how offten user send messages with any media",
+            "format": "float"
+          },
+          "link_percent": {
+            "type": "number",
+            "description": "how offten user send messages with links",
+            "format": "float"
+          },
+          "favorite_chat": {
+            "$ref": "#/components/schemas/chat_inf"
+          },
+          "media_usage": {
+            "type": "string",
+            "description": "media kind codes with was used this user",
+            "nullable": true
+          },
+          "stars_val": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "personal_channel_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "gift_count": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stars_level": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "birth_day": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "birth_month": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "birth_year": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "about": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "user_stats_min": {
+        "required": [
+          "adm_in_groups",
+          "id",
+          "msg_in_groups_count",
+          "names_count",
+          "total_groups",
+          "total_msg_count",
+          "usernames_count"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "first_name",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "description": "last_name",
+            "nullable": true
+          },
+          "is_bot": {
+            "type": "boolean",
+            "description": "this user is bot"
+          },
+          "is_active": {
+            "type": "boolean",
+            "description": "user active (not banned/deleted)"
+          },
+          "first_msg_date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "last_msg_date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "total_msg_count": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "msg_in_groups_count": {
+            "type": "integer",
+            "description": "total groups where user wrote something (total_msg_count)",
+            "format": "int64"
+          },
+          "adm_in_groups": {
+            "type": "integer",
+            "description": "count of groups where user moderator or admin",
+            "format": "int32"
+          },
+          "usernames_count": {
+            "type": "integer",
+            "description": "Known @usernames history",
+            "format": "int32"
+          },
+          "names_count": {
+            "type": "integer",
+            "description": "Known names history",
+            "format": "int32"
+          },
+          "total_groups": {
+            "type": "integer",
+            "description": "Total groups count, include without messages",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "user_stats_minapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "$ref": "#/components/schemas/user_stats_min"
+          }
+        },
+        "additionalProperties": false
+      },
+      "user_statsapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "$ref": "#/components/schemas/user_stats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "username_usage_model": {
+        "type": "object",
+        "properties": {
+          "actualUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/resolved_user"
+            },
+            "nullable": true
+          },
+          "usageByUsersInThePast": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/resolved_user"
+            },
+            "nullable": true
+          },
+          "actualGroupsOrChannels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/chat_inf_ext"
+            },
+            "nullable": true
+          },
+          "mentionByChannelOrGroupDesc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/chat_inf_ext"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "username_usage_modelapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "$ref": "#/components/schemas/username_usage_model"
+          }
+        },
+        "additionalProperties": false
+      },
+      "usr_chat_inf": {
+        "type": "object",
+        "properties": {
+          "chat": {
+            "$ref": "#/components/schemas/chat_inf"
+          },
+          "lastMessageId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "messagesCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastMessage": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "firstMessage": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "isLeft": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "usr_chat_infArrayapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/usr_chat_inf"
+            },
+            "description": "Response data",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "who_wrote_text": {
+        "type": "object",
+        "properties": {
+          "message_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "user_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "group": {
+            "$ref": "#/components/schemas/chat_inf_ext"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "who_wrote_textPagedNoCount": {
+        "required": [
+          "data",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Всего записей (not null, may be zero)",
+            "format": "int32"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/who_wrote_text"
+            },
+            "description": "Непосредственно данные  (not null, may be empty)"
+          },
+          "isLastPage": {
+            "type": "boolean"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currentPage": {
+            "type": "integer",
+            "description": "Текущая страница",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "Всего страниц",
+            "format": "int32"
+          },
+          "isSliding": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "who_wrote_textPagedNoCountapi_answer": {
+        "required": [
+          "success",
+          "tech"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": ""
+          },
+          "tech": {
+            "$ref": "#/components/schemas/tech_info"
+          },
+          "data": {
+            "$ref": "#/components/schemas/who_wrote_textPagedNoCount"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "JWT Authorization header using the Bearer scheme.'",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "text",
+      "description": "users data"
+    },
+    {
+      "name": "Users",
+      "description": "users data"
+    }
+  ]
+}
