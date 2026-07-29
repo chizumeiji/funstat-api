@@ -50,7 +50,7 @@ dev = [
 [tool.ruff]
 line-length = 120
 target-version = "py310"
-exclude = ["debug_api.py", "debug_raw.py", "test_all_endpoints.py", "test_manual.py"]
+exclude = ["debug_api.py", "debug_raw.py", "test_all_endpoints.py", "test_manual.py", ".github/"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "W", "UP", "B"]
