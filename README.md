@@ -5,6 +5,8 @@
 [![codecov](https://codecov.io/gh/chizumeiji/funstat-api/branch/main/graph/badge.svg)](https://codecov.io/gh/chizumeiji/funstat-api)
 [![Python](https://img.shields.io/pypi/pyversions/funstat-api)](https://pypi.org/project/funstat-api/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![views (14d)](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/chizumeiji/funstat-api/main/.github/traffic/views.json)](https://github.com/chizumeiji/funstat-api/graphs/traffic)
+[![clones (14d)](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/chizumeiji/funstat-api/main/.github/traffic/clones.json)](https://github.com/chizumeiji/funstat-api/graphs/traffic)
 
 Python client for the [Funstat/Telelog](http://telelog.org/) API — Telegram user and group statistics.
 
@@ -93,11 +95,6 @@ asyncio.run(main())
 - `requests >= 2.28` (sync client)
 - `httpx >= 0.24` (async client)
 
-## Repository Traffic
-
-> Chart is updated daily by a GitHub Action.
-
-![](.github/traffic/chart.png)
 
 ## Credits
 

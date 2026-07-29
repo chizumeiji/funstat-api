@@ -1,9 +1,9 @@
-name: Traffic Charts
+name: Traffic Badges
 
 on:
   schedule:
-    - cron: '0 3 * * *'   # daily at 03:00 UTC
-  workflow_dispatch:       # allow manual run
+    - cron: '0 3 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -15,48 +15,53 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Fetch traffic data from GitHub API
-      id: fetch
+    - name: Fetch traffic and write badge JSON
       uses: actions/github-script@v7
       with:
         github-token: ${{ secrets.GH_PAT }}
         script: |
+          const fs = require('fs');
+
           const [viewsRes, clonesRes] = await Promise.all([
             github.rest.repos.getViews({
               owner: context.repo.owner,
-              repo:  context.repo.repo,
-              per:   'day',
+              repo: context.repo.repo,
+              per: 'day',
             }),
             github.rest.repos.getClones({
               owner: context.repo.owner,
-              repo:  context.repo.repo,
-              per:   'day',
+              repo: context.repo.repo,
+              per: 'day',
             }),
           ]);
-          core.setOutput('data', JSON.stringify({
-            views:  viewsRes.data.views,
-            clones: clonesRes.data.clones,
+
+          const totalViews = viewsRes.data.views.reduce((s, d) => s + d.count, 0);
+          const totalClones = clonesRes.data.clones.reduce((s, d) => s + d.count, 0);
+
+          fs.mkdirSync('.github/traffic', { recursive: true });
+
+          fs.writeFileSync('.github/traffic/views.json', JSON.stringify({
+            schemaVersion: 1,
+            label: 'views (14d)',
+            message: String(totalViews),
+            color: '4c8eda',
           }));
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
+          fs.writeFileSync('.github/traffic/clones.json', JSON.stringify({
+            schemaVersion: 1,
+            label: 'clones (14d)',
+            message: String(totalClones),
+            color: '97ca00',
+          }));
 
-    - name: Install matplotlib
-      run: pip install matplotlib
+          core.info(`Views: ${totalViews} | Clones: ${totalClones}`);
 
-    - name: Generate chart
-      env:
-        TRAFFIC_DATA: ${{ steps.fetch.outputs.data }}
-      run: python .github/scripts/traffic_chart.py
-
-    - name: Commit & push chart
+    - name: Commit and push
       run: |
-        git config user.name  "github-actions[bot]"
+        git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add .github/traffic/
         git diff --staged --quiet || (
-          git commit -m "chore: update traffic charts [skip ci]"
+          git commit -m "chore: update traffic badges [skip ci]"
           git push
         )
