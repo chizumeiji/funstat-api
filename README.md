@@ -1,5 +1,11 @@
 # funstat-api
 
+[![PyPI version](https://img.shields.io/pypi/v/funstat-api?color=blue)](https://pypi.org/project/funstat-api/)
+[![PyPI downloads](https://img.shields.io/pypi/dm/funstat-api?color=brightgreen&label=downloads%2Fmonth)](https://pypi.org/project/funstat-api/)
+[![codecov](https://codecov.io/gh/chizumeiji/funstat-api/branch/main/graph/badge.svg)](https://codecov.io/gh/chizumeiji/funstat-api)
+[![Python](https://img.shields.io/pypi/pyversions/funstat-api)](https://pypi.org/project/funstat-api/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Python client for the [Funstat/Telelog](http://telelog.org/) API — Telegram user and group statistics.
 
 Supports both **sync** and **async** usage.
