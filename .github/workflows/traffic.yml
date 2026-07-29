@@ -1,0 +1,62 @@
+name: Traffic Charts
+
+on:
+  schedule:
+    - cron: '0 3 * * *'   # daily at 03:00 UTC
+  workflow_dispatch:       # allow manual run
+
+permissions:
+  contents: write
+
+jobs:
+  traffic:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Fetch traffic data from GitHub API
+      id: fetch
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const [viewsRes, clonesRes] = await Promise.all([
+            github.rest.repos.getViews({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              per:   'day',
+            }),
+            github.rest.repos.getClones({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              per:   'day',
+            }),
+          ]);
+          core.setOutput('data', JSON.stringify({
+            views:  viewsRes.data.views,
+            clones: clonesRes.data.clones,
+          }));
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install matplotlib
+      run: pip install matplotlib
+
+    - name: Generate chart
+      env:
+        TRAFFIC_DATA: ${{ steps.fetch.outputs.data }}
+      run: python .github/scripts/traffic_chart.py
+
+    - name: Commit & push chart
+      run: |
+        git config user.name  "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add .github/traffic/
+        git diff --staged --quiet || (
+          git commit -m "chore: update traffic charts [skip ci]"
+          git push
+        )

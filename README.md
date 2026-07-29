@@ -93,6 +93,12 @@ asyncio.run(main())
 - `requests >= 2.28` (sync client)
 - `httpx >= 0.24` (async client)
 
+## Repository Traffic
+
+> Chart is updated daily by a GitHub Action.
+
+![](.github/traffic/chart.png)
+
 ## Credits
 
 - **Author:** [@meiji_dev](https://t.me/meiji_dev)
