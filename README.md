@@ -8,7 +8,7 @@
 [![views (14d)](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/chizumeiji/funstat-api/main/.github/traffic/views.json&p=1)](https://github.com/chizumeiji/funstat-api/graphs/traffic)
 [![clones (14d)](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/chizumeiji/funstat-api/main/.github/traffic/clones.json&p=1)](https://github.com/chizumeiji/funstat-api/graphs/traffic)
 
-Python client for the [Funstat/Telelog](http://telelog.org/) API — Telegram user and group statistics.
+Python client for the [Funstat/Telelog](https://funstat.info/?start=0108FC1E9BEF75617466) API — Telegram user and group statistics.
 
 Supports both **sync** and **async** usage.
 
