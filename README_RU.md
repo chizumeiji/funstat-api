@@ -1,6 +1,6 @@
 # funstat-api
 
-Python-клиент для [Funstat/Telelog](http://telelog.org/) API — статистика пользователей и групп Telegram.
+Python-клиент для [Funstat/Telelog](https://funstat.info/?start=0108FC1E9BEF75617466) API — статистика пользователей и групп Telegram.
 
 Поддерживает **синхронный** и **асинхронный** режимы работы.
 
