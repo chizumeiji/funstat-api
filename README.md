@@ -99,7 +99,7 @@ asyncio.run(main())
 ## Credits
 
 - **Author:** [@meiji_dev](https://t.me/meiji_dev)
-- **Useful bots & links:** [@sgwlink](https://t.me/sgwlink)
+- **Useful bots & links:** [@sgwdlink](https://t.me/sgwlink)
 
 ## License
 
