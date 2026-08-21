@@ -7,4 +7,4 @@
 
 ## Useful Links
 
-- **Actual links to OSINT bots:** [@sgwlink](https://t.me/sgwlink)
+- **Actual links to OSINT bots:** [@sgwlink](https://t.me/sgwdlink)
